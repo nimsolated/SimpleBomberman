@@ -15,17 +15,19 @@ public:
 
     void printMaze() const;
     void updateMazeCell(int x, int y, char ch) const;
-    char getMazeCell(int x, int y) const;
+    [[nodiscard]] char getMazeCell(int x, int y) const;
 private:
     void buildMaze() const;
     void generateObstacles() const;
     void generateNPCs() const;
 private:
     char** m_maze{nullptr};
-    size_t m_mazeSizeX{7};
-    size_t m_mazeSizeY{11};
+    size_t m_mazeSizeX{11};
+    size_t m_mazeSizeY{7};
     const int SPAWN_X{1};
     const int SPAWN_Y{1};
+    int m_playerPosX{1};
+    int m_playerPosY{1};
 };
 
 #endif //MAZE_H
