@@ -34,6 +34,7 @@ Maze::Maze(const size_t sizeX, const size_t sizeY) {
 }
 
 Maze::~Maze() {
+    // deallocate the maze
     for (size_t i = 0; i < m_mazeSizeX; ++i) {
         delete[] m_maze[i];
     }
@@ -41,6 +42,7 @@ Maze::~Maze() {
 }
 
 void Maze::printMaze() const {
+    // print the maze cell by cell, up to down, left to right
     for (size_t i = 0; i < m_mazeSizeX; ++i) {
         for (size_t j = 0; j < m_mazeSizeY; ++j) {
             std::cout << m_maze[i][j];
@@ -50,20 +52,22 @@ void Maze::printMaze() const {
 }
 
 void Maze::updateMazeCell(const int x, const int y, const char ch) const {
+    // updates the cell at the given coordinates
     m_maze[x][y] = ch;
 }
 
 char Maze::getMazeCell(const int x, const int y) const {
+    // gets the cell at the given coordinates
     return m_maze[x][y];
 }
 
 void Maze::buildMaze() const {
     for (size_t i = 0; i < m_mazeSizeX; ++i) {
-        if (i == 0 || i == m_mazeSizeX - 1) {
+        if (i == 0 || i == m_mazeSizeX - 1) { // outer walls conditions
             for (size_t j = 0; j < m_mazeSizeY; ++j) {
                 m_maze[i][j] = '#';
             }
-        } else if (i % 2 != 0) {
+        } else if (i % 2 != 0) { // inner walls conditions for odd rows
             for (size_t j = 0; j < m_mazeSizeY; ++j) {
                 if (j == 0 || j == m_mazeSizeY - 1) {
                     m_maze[i][j] = '#';
@@ -71,7 +75,7 @@ void Maze::buildMaze() const {
                     m_maze[i][j] = '_';
                 }
             }
-        } else {
+        } else { // inner walls conditions for even rows
             for (size_t j = 0; j < m_mazeSizeY; ++j) {
                 if (j % 2 == 0) {
                     m_maze[i][j] = '#';
